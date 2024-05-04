@@ -3,11 +3,14 @@ package com.jay.accounts.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Data
+@Getter @Setter @ToString
 public class BaseEntity {
 
     @Column(updatable = false)
