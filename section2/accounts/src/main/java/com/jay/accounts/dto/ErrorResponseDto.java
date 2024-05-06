@@ -11,10 +11,7 @@ import java.time.LocalDateTime;
 public class ErrorResponseDto {
 
     private String apiPath;
-
     private HttpStatus errorCode;
-
     private String errorMsg;
-
     private LocalDateTime errorTime;
 }
