@@ -1,6 +1,7 @@
 package com.jay.loans.controller;
 
 import com.jay.loans.constants.LoansConstants;
+import com.jay.loans.dto.LoansDto;
 import com.jay.loans.dto.ResponseDto;
 import com.jay.loans.service.ILoansService;
 import lombok.AllArgsConstructor;
@@ -22,4 +23,14 @@ public class LoansController {
                 .status(HttpStatus.CREATED)
                 .body(new ResponseDto(LoansConstants.STATUS_201, LoansConstants.MESSAGE_201));
     }
+
+    @GetMapping("/fetch")
+    public ResponseEntity<LoansDto> fetchLoanDetails(@RequestParam String mobileNumber){
+        LoansDto loansDto = iLoansService.fetchLoan(mobileNumber);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(loansDto);
+    }
+
+
 }
