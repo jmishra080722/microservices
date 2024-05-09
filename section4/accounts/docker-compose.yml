@@ -22,7 +22,7 @@ services:
     networks:
       - eazybank
   cards:
-    image: "jmishra080722@cards:s4"
+    image: "jmishra080722/cards:s4"
     container_name: "cards-ms"
     ports:
       - "9000:9000"
@@ -31,7 +31,7 @@ services:
         limits:
           memory: 700m
     networks:
-      -eazybank
+      - eazybank
 networks:
   eazybank:
     driver: "bridge"
