@@ -69,9 +69,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<!--<image>
-						<name>jmishra080722/${project.artifactId}:s4</name>
-					</image>-->
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -89,7 +86,7 @@
 						<image>openjdk:21-jdk</image>
 					</from>
 					<to>
-						<image>jmishra080722/${project.artifactId}:s4</image>
+						<image>jmishra080722/${project.artifactId}:s6</image>
 					</to>
 				</configuration>
 			</plugin>
