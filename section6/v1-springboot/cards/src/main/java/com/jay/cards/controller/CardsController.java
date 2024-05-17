@@ -1,6 +1,7 @@
 package com.jay.cards.controller;
 
 import com.jay.cards.constants.CardsConstants;
+import com.jay.cards.dto.CardsContactInfoDto;
 import com.jay.cards.dto.CardsDto;
 import com.jay.cards.dto.ErrorResponseDto;
 import com.jay.cards.dto.ResponseDto;
@@ -43,6 +44,9 @@ public class CardsController {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private CardsContactInfoDto cardsContactInfoDto;
 
     @Operation(
             summary = "Create Card REST API",
@@ -219,4 +223,28 @@ public class CardsController {
                 .body(environment.getProperty("JAVA_HOME"));
     }
 
+    @Operation(
+            summary = "Get Contact Info",
+            description = "Contact Info details that can be reached out in case of any issues"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<CardsContactInfoDto> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(cardsContactInfoDto);
+    }
 }
