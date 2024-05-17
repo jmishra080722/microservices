@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+
+accounts:
+  message: "Welcome to EazyBank accounts related local APIs "
+  contactDetails:
+    name: "Jay Mishra - Developer"
+    email: "Jay@eazybank.com"
+  onCallSupport:
+    - (123) 456-7890
+    - (321) 654-0987
