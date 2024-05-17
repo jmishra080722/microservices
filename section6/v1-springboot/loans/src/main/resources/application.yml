@@ -17,4 +17,7 @@ spring:
             ddl-auto: update
         show-sql: true
 
+build:
+    version: 3.0
+
 
