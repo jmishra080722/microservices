@@ -20,5 +20,5 @@ spring:
           clone-on-start: true
           force-pull: true
 
-
-
+encrypt:
+  key:  "b19c0a3f4e7d8c6e2f5a1b3c9d0e7a6c4b3d9f1e7c0a8b3d6a1e4c8f2d7e5a3"
