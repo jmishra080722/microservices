@@ -2,7 +2,7 @@ spring:
   application:
     name: "eurekaserver"
   config:
-    import: "configserver:http://localhost:8071/"
+    import: "optional:configserver:http://localhost:8071/"
 
 management:
   endpoints:
@@ -18,5 +18,3 @@ management:
     health:
       probes:
         enabled: true
-
-
