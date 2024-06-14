@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-@Order
+@Order(1)
 @Component
 public class RequestTraceFilter implements GlobalFilter {
 
