@@ -1,1 +1,8 @@
-spring.application.name=message
+server:
+  port: 9010
+spring:
+  application:
+    name: "message"
+  cloud:
+    function:
+      definition: email|sms
