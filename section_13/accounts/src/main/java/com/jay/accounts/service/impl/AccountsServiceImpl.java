@@ -3,6 +3,7 @@ package com.jay.accounts.service.impl;
 
 import com.jay.accounts.constants.AccountsConstants;
 import com.jay.accounts.dto.AccountsDto;
+import com.jay.accounts.dto.AccountsMsgDto;
 import com.jay.accounts.dto.CustomerDto;
 import com.jay.accounts.entity.Accounts;
 import com.jay.accounts.entity.Customer;
@@ -14,6 +15,9 @@ import com.jay.accounts.repository.AccountsRepository;
 import com.jay.accounts.repository.CustomerRepository;
 import com.jay.accounts.service.IAccountsService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,8 +28,11 @@ import java.util.Random;
 @AllArgsConstructor
 public class AccountsServiceImpl implements IAccountsService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AccountsServiceImpl.class);
+
     private AccountsRepository accountsRepository;
     private CustomerRepository customerRepository;
+    private StreamBridge streamBridge;
 
     @Override
     public void createAccount(CustomerDto customerDto) {
@@ -37,7 +44,16 @@ public class AccountsServiceImpl implements IAccountsService {
                     customerDto.getMobileNumber());
         }
         Customer savedCustomer = customerRepository.save(customer);
-        accountsRepository.save(createNewAccount(savedCustomer));
+        Accounts savedAccount = accountsRepository.save(createNewAccount(savedCustomer));
+        sendCommunication(savedAccount, savedCustomer);
+    }
+
+    private void sendCommunication(Accounts accounts, Customer customer){
+        var accountsMsgDto = new AccountsMsgDto(accounts.getAccountNumber(), customer.getName(),
+                customer.getEmail(), customer.getMobileNumber());
+        logger.info("Sending Communication request for the details: "+accountsMsgDto);
+        var result = streamBridge.send("sendCommunication-out-0", accountsMsgDto);
+        logger.info("Is the communication request processed successfully: "+result);
 
     }
 
